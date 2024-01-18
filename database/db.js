@@ -1,23 +1,9 @@
-const {MongoClient} =  require("mongodb");
 
-const uri = "mongodb+srv://admin:admin@cluster0.dmwgm.mongodb.net/?retryWrites=true&w=majority";
-
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const dbName = "lessons_store"
-const connectDB= async ()=>{
-    try{
-        await client.connect().then(()=>{
-            console.log("Connected to MongoDB")
-        })
-        return client.db(dbName)
-    }
-    catch(err){
-console.log("Failed to connect to MongoDB");
-    }
-   
-
-}
+const uri = process.env.MONGODB_URI || "mongodb+srv://admin:admin@cluster0.dmwgm.mongodb.net/"
+const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
+let db = client.db(dbName);
 
 
-module.exports = {
-    connectDB}
+module.exports = db
