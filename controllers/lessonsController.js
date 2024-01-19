@@ -40,7 +40,12 @@ const updateLesson = async (req,res) =>{
  const lesson = await db.collection(lessons).findOne({_id: new ObjectId(lessonIds[i].id)})
  console.log(lesson)
  //Update the individual lesson
-
+ if(lesson.spaces <=0){
+    return res.json({
+        success:false,
+        message:"this lesson is out of stock"
+    })
+ }
   const update = await db.collection(lessons).updateOne({_id:new ObjectId(lesson._id)},{$set:{
  spaces:lesson.spaces - lessonIds[i].spaces
 }})
