@@ -17,8 +17,10 @@ app.use(cors())
 app.use("/api/v1",lessonsRouter)
 app.use("/api/v1",ordersRouter)
 
-app.get("/", ()=>{
-    console.log("Hello World")
+app.get("/", (req,res)=>{
+    
+    res.json({success:true, message:"Hi luca Welcome to Cw2 Api"})
+    
 })
 
 
