@@ -34,11 +34,12 @@ const updateLesson = async (req,res) =>{
  const lessonIds = orderForUpdate.lessonIds
  let updateCompleted
 
+ console.log(lessonIds)
 
  for (var i = 0 ; i<lessonIds.length ; i++) {
  // get the lesson
- const lesson = await db.collection(lessons).findOne({_id: new ObjectId(lessonIds[i].id)})
- console.log(lesson)
+ const lesson = await db.collection(lessons).findOne({_id: new ObjectId(lessonIds[i]._id)})
+
  //Update the individual lesson
  if(lesson.spaces <=0){
     return res.json({
