@@ -2,14 +2,16 @@ const db = require("../database/db")
 const {lessons} =  require("../utils")
 
 const searchCotroller = async (req,res) => {
-  const index =   await db.collection('lessons').createIndex({ topic: 'text', location: 'text' });
-console.log(index)
+ 
 
   const {q} = req.query
-console.log(q)
+
  
 const result = await db.collection('lessons').find({
-    $text: { $search: q }
+  $or: [
+    {location: {'$regex': q, '$options': 'i'}},
+    {title: {'$regex': q, '$options': 'i'}}
+]
   }).toArray();
   
   if(result.length <= 0){
