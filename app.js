@@ -16,11 +16,11 @@ const logger = require('./middleware/logger');
 //middleware
 app.use(logger)
 app.use('/images', async (req, res, next) => {
-    const filePath = path.join(__dirname, "static", req.url, "")
+    const imagePath = path.join(__dirname, "static", req.url, "")
     
-    fs.stat(filePath, (err, fileInfo) => {
-        if (err) return res.status(404).send({message: "File not found"});
-        if (fileInfo.isFile()) res.sendFile(filePath);
+    fs.stat(imagePath, (err, fileInfo) => {
+        if (err) return res.status(404).send({message: "image not found"});
+        if (fileInfo.isFile()) res.sendFile(imagePath);
         else next()
     })
 })
