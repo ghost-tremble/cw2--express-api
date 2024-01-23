@@ -1,5 +1,5 @@
 const db = require("../database/db")
-const {lessons} =  require("../utils")
+
 
 const searchCotroller = async (req,res) => {
  
