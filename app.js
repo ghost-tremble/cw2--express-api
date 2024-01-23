@@ -1,15 +1,21 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const lessonsRouter = require('./routes/lessonRoutes')
 const ordersRouter = require('./routes/orderRoutes');
 const searchRouter = require('./routes/searchRoutes');
 const logger = require('./middleware/logger');
+const staticFile = require('./middleware/staticFile');
+
+
 
 
 //middleware
 app.use(logger)
+app.use('/image', staticFile )
 app.use(express.json())
 app.use(cors())
 

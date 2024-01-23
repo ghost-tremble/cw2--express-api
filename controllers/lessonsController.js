@@ -26,6 +26,27 @@ return res.json({success:true,message:"created successfully"})
 }
 
 
+const createBatchLessons = async (req, res) => {
+    const lessonsArray = req.body.lessons;
+  
+    if (!Array.isArray(lessonsArray)) {
+      return res.json({ success: false, message: "Expected an array of lessons." });
+    }
+  
+    for (const lesson of lessonsArray) {
+      const { topic, spaces, location, price, image } = lesson;
+      if (!(topic && spaces && location && price && image)) {
+        return res.json({ success: false, message: "All fields are required for each lesson." });
+      }
+    }
+  
+    const collection = await db.collection("lessons").insertMany(lessonsArray);
+  
+  
+    return res.json({ success: true, message: "Batch created successfully" });
+  };
+  
+
 
 const updateLesson = async (req,res) =>{
     // Retrieve the order and update the lessons collectionn 
@@ -72,5 +93,6 @@ return res.json({success:true,message:"updated successfully",})
 module.exports = {
     getAllLessons,
     createLesson,
-    updateLesson
+    updateLesson,
+    createBatchLessons
 }
