@@ -15,7 +15,7 @@ const staticFile = require('./middleware/staticFile');
 
 //middleware
 app.use(logger)
-app.use('/image', staticFile )
+app.use('/images', staticFile )
 app.use(express.json())
 app.use(cors())
 
